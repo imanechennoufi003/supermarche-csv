@@ -8,9 +8,13 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.text.DecimalFormat; // AJOUTÉ
+import java.util.Locale;        // AJOUTÉ
 
 public class ProductCsvDao {
     private final String path;
+    // Utiliser un formateur pour garantir le point décimal (Locale.ROOT)
+    private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("0.00", java.text.DecimalFormatSymbols.getInstance(Locale.ROOT));
 
     public ProductCsvDao(String path) {
         this.path = path;
@@ -41,7 +45,7 @@ public class ProductCsvDao {
             for (Product p : products) {
                 writer.writeNext(new String[]{
                     p.getId(), p.getName(), p.getCategory(),
-                    String.valueOf(p.getPrice()),
+                    DECIMAL_FORMAT.format(p.getPrice()), // Utilisation du formatteur
                     String.valueOf(p.getStock()),
                     String.valueOf(p.getMinStock())
                 });

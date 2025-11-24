@@ -1,8 +1,9 @@
 package service;
 
-import model.Product;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import model.Product; // AJOUTÉ
 
 public class InventoryService {
     private final List<Product> products;
@@ -30,6 +31,7 @@ public class InventoryService {
     }
 
     public List<Product> lowStockAlerts() {
-        return products.stream().filter(p -> p.getStock() <= p.getMinStock()).toList();
+        // Utiliser toList() (Java 16+) ou collect(Collectors.toList()) (Java 8/11/15)
+        return products.stream().filter(p -> p.getStock() <= p.getMinStock()).collect(Collectors.toList());
     }
 }

@@ -45,6 +45,7 @@ public class OrderCsvDao {
                         .filter(o -> o.getId().equals(orderId))
                         .findFirst().orElse(null);
                 if (order != null) {
+                    // Assurez-vous que OrderItem a le bon constructeur (4 args)
                     order.addItem(new OrderItem(orderId, row[1],
                             Integer.parseInt(row[2]),
                             Double.parseDouble(row[3])));
@@ -56,6 +57,7 @@ public class OrderCsvDao {
     }
 
     public void saveAll(List<Order> orders) throws Exception {
+        // Sauvegarde des commandes
         try (CSVWriter writer = new CSVWriter(new FileWriter(ordersPath))) {
             writer.writeNext(new String[]{"id","customerId","date","total"});
             for (Order o : orders) {
@@ -63,6 +65,7 @@ public class OrderCsvDao {
             }
         }
 
+        // Sauvegarde des items de commandes
         try (CSVWriter writer = new CSVWriter(new FileWriter(itemsPath))) {
             writer.writeNext(new String[]{"orderId","productId","quantity","unitPrice"});
             for (Order o : orders) {

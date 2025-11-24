@@ -23,7 +23,8 @@ public class CustomerCsvDao {
             boolean header = true;
             while ((row = reader.readNext()) != null) {
                 if (header) { header = false; continue; }
-                customers.add(new Customer(row[0], row[1], row[2], row[3]));
+                // Assurez-vous que Customer a le bon constructeur (4 args)
+                customers.add(new Customer(row[0], row[1], row[2], row[3])); 
             }
         }
         return customers;
@@ -33,6 +34,7 @@ public class CustomerCsvDao {
         try (CSVWriter writer = new CSVWriter(new FileWriter(path))) {
             writer.writeNext(new String[]{"id","name","email","phone"});
             for (Customer c : customers) {
+                // Assurez-vous que Customer a les Getters
                 writer.writeNext(new String[]{c.getId(), c.getName(), c.getEmail(), c.getPhone()});
             }
         }

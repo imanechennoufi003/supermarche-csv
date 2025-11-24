@@ -24,8 +24,10 @@ public class OrderService {
             if (p.getStock() < item.getQuantity()) {
                 throw new IllegalStateException("Stock insuffisant pour " + p.getName());
             }
+            // Décrémente le stock en mémoire (dans le service)
             p.setStock(p.getStock() - item.getQuantity());
         }
         order.setTotal(computeTotal(order));
+        // La sauvegarde finale sera gérée par Main.java
     }
 }
