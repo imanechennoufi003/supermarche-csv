@@ -28,10 +28,10 @@ public class Main {
             products = productDao.findAll();
             customers = customerDao.findAll();
             orders = orderDao.findAll();
-            System.out.printf("✅ Données chargées : %d produits, %d clients, %d commandes.\n", 
+            System.out.printf(" Données chargées : %d produits, %d clients, %d commandes.\n", 
                 products.size(), customers.size(), orders.size());
         } catch (Exception e) {
-            System.err.println("❌ Erreur au chargement des données. Assurez-vous que les fichiers CSV existent dans le dossier 'data/' et que le JAR OpenCSV est bien inclus.\n" + e.getMessage());
+            System.err.println("Erreur au chargement des données. Assurez-vous que les fichiers CSV existent dans le dossier 'data/' et que le JAR OpenCSV est bien inclus.\n" + e.getMessage());
             return;
         }
 
@@ -82,9 +82,9 @@ public class Main {
                     case "4" -> {
                         List<Product> alerts = inventory.lowStockAlerts();
                         if (alerts.isEmpty()) {
-                            System.out.println("✅ Aucun produit en stock bas.");
+                            System.out.println("Aucun produit en stock bas.");
                         } else {
-                            alerts.forEach(p -> System.out.printf("🚨 ALERTE: %s (Stock: %d, Min: %d)\n", p.getName(), p.getStock(), p.getMinStock()));
+                            alerts.forEach(p -> System.out.printf("ALERTE: %s (Stock: %d, Min: %d)\n", p.getName(), p.getStock(), p.getMinStock()));
                         }
                     }
                     
@@ -113,7 +113,7 @@ public class Main {
                         String customerId = sc.nextLine();
                         
                         if (customers.stream().noneMatch(c -> c.getId().equals(customerId))) {
-                             System.out.println("❌ Erreur: Client " + customerId + " introuvable.");
+                             System.out.println("Erreur: Client " + customerId + " introuvable.");
                              break;
                         }
 
@@ -146,7 +146,7 @@ public class Main {
                         } else {
                             orderService.applyOrder(order);
                             orders.add(order);
-                            System.out.println("✅ Commande créée et stock mis à jour: " + order);
+                            System.out.println(" Commande créée et stock mis à jour: " + order);
                         }
                     }
                             case "8" -> {
