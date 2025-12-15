@@ -160,7 +160,7 @@ public class Main {
                     default -> System.out.println("Choix invalide.");
                 }
             } catch (Exception e) {
-                System.err.println("❌ Erreur: " + e.getMessage());
+                System.err.println(" Erreur: " + e.getMessage());
             }
         }
     }
